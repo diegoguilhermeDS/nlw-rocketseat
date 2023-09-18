@@ -17,12 +17,13 @@ export async function createTranscriptionRoute(app: FastifyInstance) {
     const { prompt } = bodySchema.parse(request.body)
 
 
+    console.log("back end")
     const video = await prisma.video.findUniqueOrThrow({
         where: {
             id: videoId,
         }
     })
-
+    console.log(video)
     const videoPath = video.path
 
     const audioReadStream = createReadStream(videoPath)
